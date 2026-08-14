@@ -6,12 +6,15 @@ import { PecasListComponent } from './components/layout/pecas/pecas-list/pecas-l
 import { PecasDetailsComponent } from './components/layout/pecas/pecas-details/pecas-details.component';
 import { ClientesListComponent } from './components/layout/clientes/clientes-list/clientes-list.component';
 import { ClientesDetailsComponent } from './components/layout/clientes/clientes-details/clientes-details.component';
-import { VendasDetailsComponent } from './components/layout/vendas/vendas-details/vendas-details.component';
-import { VendasListComponent } from './components/layout/vendas/vendas-list/vendas-list.component';
+import { VendasCarrosDetailsComponent } from './components/layout/vendas/vendasCarros/vendas-carros-details/vendas-carros-details.component';
+import { VendasCarrosListComponent } from './components/layout/vendas/vendasCarros/vendas-carros-list/vendas-carros-list.component';
+import { VendasPecasDetailsComponent } from './components/layout/vendas/vendasPecas/vendas-pecas-details/vendas-pecas-details.component';
+import { VendasPecasListComponent } from './components/layout/vendas/vendasPecas/vendas-pecas-list/vendas-pecas-list.component';
 import { CarroslistComponent } from './components/layout/carros/carroslist/carroslist.component';
+import { Component } from '@angular/core';
 
 
-export const routes: Routes = [
+export const routes : Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: PrincipalComponent,
@@ -25,9 +28,12 @@ export const routes: Routes = [
       {path: 'clientes', component: ClientesListComponent},
       {path: 'clientes/new', component: ClientesDetailsComponent},
       {path: 'clientes/edit/:id', component: ClientesDetailsComponent},
-      {path: 'vendas', component: VendasListComponent},
-      {path: 'vendas/new', component: VendasDetailsComponent},
-      {path: 'vendas/edit/:id', component: VendasDetailsComponent},
+      {path: 'vendas', component: VendasCarrosListComponent},
+      {path: 'vendas/new', component: VendasCarrosDetailsComponent},
+      {path: 'vendas/edit/:id', component: VendasCarrosDetailsComponent},
+      {path: 'vendas', component:  VendasPecasListComponent},
+      {path: 'vendas/new', component: VendasPecasDetailsComponent},
+      {path: 'vendas/edit/:id', component: VendasPecasDetailsComponent}
     ]
   }
 ];

@@ -1,0 +1,57 @@
+.clientes-page {
+  width: 100%;
+  padding: 30px;
+}
+
+/* Card principal */
+.card {
+  border-radius: 12px;
+}
+
+/* Tabela */
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/* Botões */
+.btn {
+  border-radius: 8px;
+}
+
+/* Título */
+h2 {
+  font-weight: 600;
+}
+
+/* Área de paginação */
+.paginacao {
+  margin-top: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+  .clientes-page {
+    padding: 15px;
+  }
+
+  .clientes-page > .d-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 15px;
+  }
+
+  .table {
+    font-size: 14px;
+  }
+
+}

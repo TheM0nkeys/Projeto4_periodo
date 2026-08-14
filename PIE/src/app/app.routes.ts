@@ -8,13 +8,13 @@ import { ClientesListComponent } from './components/layout/clientes/clientes-lis
 import { ClientesDetailsComponent } from './components/layout/clientes/clientes-details/clientes-details.component';
 import { VendasDetailsComponent } from './components/layout/vendas/vendas-details/vendas-details.component';
 import { VendasListComponent } from './components/layout/vendas/vendas-list/vendas-list.component';
-import { CarrosListComponent } from './components/layout/carros/carros-list/carros-list.component';
+import { CarroslistComponent } from './components/layout/carros/carroslist/carroslist.component';
 export const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
+  {path: '', redirectTo: 'clientes', pathMatch: 'full'},
+  {path: 'clientes', component: ClientesListComponent},
   {path: 'dashboard', component: PrincipalComponent,
     children: [
-      {path: 'carros', component: CarrosListComponent},
+      {path:'carros', component: CarroslistComponent},
       {path: 'carros/new', component: CarrosDetailsComponent},
       {path: 'carros/edit/:id', component: CarrosDetailsComponent},
       {path: 'pecas', component: PecasListComponent},

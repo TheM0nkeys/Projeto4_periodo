@@ -1,1 +1,207 @@
-<p>clientes-details works!</p>
+<div class="clientes-page">
+
+  <div class="form-card">
+
+    <div class="header">
+
+      <div>
+
+        <h2>
+          {{ modoEdicao ? 'Editar cliente' : 'Novo cliente' }}
+        </h2>
+
+        <p class="text-muted">
+          Preencha os dados do cliente.
+        </p>
+
+      </div>
+
+      <a
+        routerLink="/dashboard/clientes"
+        class="btn btn-outline-secondary">
+
+        ← Voltar
+
+      </a>
+
+    </div>
+
+    <form
+      [formGroup]="clienteForm"
+      (ngSubmit)="salvar()">
+
+      <div class="campo">
+
+        <mdb-form-control>
+
+          <input
+            mdbInput
+            type="text"
+            id="nome"
+            class="form-control"
+            formControlName="nome"
+            placeholder="Digite o nome"
+          />
+
+          <label
+            mdbLabel
+            class="form-label"
+            for="nome">
+
+            Nome
+
+          </label>
+
+        </mdb-form-control>
+
+        @if (nomeInvalido) {
+
+          <div class="erro">
+
+            @if (
+              clienteForm.controls.nome.hasError('required')
+            ) {
+
+              O nome é obrigatório.
+
+            }
+
+            @if (
+              clienteForm.controls.nome.hasError('minlength')
+            ) {
+
+              O nome deve ter pelo menos 3 caracteres.
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+      <div class="campo">
+
+        <mdb-form-control>
+
+          <input
+            mdbInput
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="cliente@email.com"
+          />
+
+          <label
+            mdbLabel
+            class="form-label"
+            for="email">
+
+            E-mail
+
+          </label>
+
+        </mdb-form-control>
+
+        @if (emailInvalido) {
+
+          <div class="erro">
+
+            @if (
+              clienteForm.controls.email.hasError('required')
+            ) {
+
+              O e-mail é obrigatório.
+
+            }
+
+            @if (
+              clienteForm.controls.email.hasError('email')
+            ) {
+
+              Digite um e-mail válido.
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+      <div class="campo">
+
+        <mdb-form-control>
+
+          <input
+            mdbInput
+            type="tel"
+            id="telefone"
+            class="form-control"
+            formControlName="telefone"
+            placeholder="(45) 99999-9999"
+          />
+
+          <label
+            mdbLabel
+            class="form-label"
+            for="telefone">
+
+            Telefone
+
+          </label>
+
+        </mdb-form-control>
+
+        @if (telefoneInvalido) {
+
+          <div class="erro">
+
+            @if (
+              clienteForm.controls.telefone.hasError('required')
+            ) {
+
+              O telefone é obrigatório.
+
+            }
+
+            @if (
+              clienteForm.controls.telefone.hasError('minlength')
+            ) {
+
+              Digite um telefone válido.
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+      <div class="botoes">
+
+        <a
+          routerLink="/dashboard/clientes"
+          class="btn btn-outline-secondary">
+
+          Cancelar
+
+        </a>
+
+        <button
+          type="submit"
+          class="btn btn-primary">
+
+          {{ modoEdicao ? 'Atualizar' : 'Cadastrar' }}
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

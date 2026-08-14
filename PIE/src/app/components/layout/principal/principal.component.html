@@ -1,1 +1,52 @@
-<router-outlet>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <!-- Logo / Marca -->
+    <a class="navbar-brand d-flex align-items-center" routerLink="/dashboard/carros">
+      <img
+        src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp"
+        height="25"
+        alt="Logo"
+        class="me-2"
+      />
+      <span class="fw-bold text-primary">SISTEMA</span>
+    </a>
+
+    <!-- Botão Hamburger (Mobile) -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="noListNav.toggle()"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Links de Navegação Alinhados na Horizontal -->
+    <div
+      class="collapse navbar-collapse"
+      id="navbarNavAltMarkup"
+      mdbCollapse
+      #noListNav="mdbCollapse"
+    >
+      <div class="navbar-nav me-auto mb-2 mb-lg-0">
+        <a class="nav-link" routerLink="/dashboard/carros" routerLinkActive="active">Carros</a>
+        <a class="nav-link" routerLink="/dashboard/pecas" routerLinkActive="active">Peças</a>
+        <a class="nav-link" routerLink="/dashboard/clientes" routerLinkActive="active">Clientes</a>
+        <a class="nav-link" routerLink="/dashboard/vendas" routerLinkActive="active">Vendas</a>
+      </div>
+
+      <!-- Botão Sair / Logout (Opcional) -->
+      <div class="d-flex align-items-center">
+        <a class="btn btn-outline-danger btn-sm" routerLink="/login">Sair</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Conteúdo das Páginas (Filhas da rota Dashboard) -->
+<div class="container my-4">
+  <router-outlet></router-outlet>
+</div>

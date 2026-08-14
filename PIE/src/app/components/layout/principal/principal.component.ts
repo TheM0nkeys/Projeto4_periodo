@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from "../../../../../node_modules/@angular/router/router_module.d-Bx9ArA6K";
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
 
 @Component({
   selector: 'app-principal',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    MdbCollapseModule
+  ],
   templateUrl: './principal.component.html',
-  styleUrl: './principal.component.scss'
+  styleUrls: ['./principal.component.scss']
 })
-export class PrincipalComponent {
-
-}
+export class PrincipalComponent { }

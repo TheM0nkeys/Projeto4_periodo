@@ -13,14 +13,13 @@
       <mdb-form-control class="mb-4">
         <input
           mdbInput
-          type="email"
-          id="emailInput"
+          type="text"
           class="form-control"
-          [(ngModel)]="loginData.email"
+          [(ngModel)]="usuario.nome"
           name="email"
           required
         />
-        <label mdbLabel class="form-label" for="emailInput">Endereço de E-mail</label>
+        <label mdbLabel class="form-label">Usuario</label>
       </mdb-form-control>
 
       <!-- Campo Senha -->
@@ -30,27 +29,13 @@
           type="password"
           id="passwordInput"
           class="form-control"
-          [(ngModel)]="loginData.password"
+          [(ngModel)]="usuario.cofre"
           name="password"
           required
         />
         <label mdbLabel class="form-label" for="passwordInput">Senha</label>
       </mdb-form-control>
 
-      <!-- Lembrar-me e Esqueci a Senha -->
-      <div class="row mb-4">
-        <div class="col d-flex justify-content-start">
-          <mdb-checkbox
-            [(ngModel)]="loginData.rememberMe"
-            name="rememberMe">
-            Lembrar-me
-          </mdb-checkbox>
-        </div>
-
-        <div class="col text-end">
-          <a href="#" class="text-primary text-decoration-none small">Esqueceu a senha?</a>
-        </div>
-      </div>
 
       <!-- Botão de Submit -->
       <button
@@ -59,15 +44,7 @@
         class="btn btn-primary btn-block mb-4 w-100 py-2">
         Entrar
       </button>
-
-      <!-- Registrar-se -->
-      <div class="text-center">
-        <p class="text-muted mb-0">
-          Não tem uma conta?
-          <a href="#" class="text-primary text-decoration-none fw-bold">Cadastre-se</a>
-        </p>
-      </div>
-
     </form>
   </div>
+
 </div>

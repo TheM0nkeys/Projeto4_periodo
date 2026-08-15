@@ -57,7 +57,9 @@
               "node_modules/mdb-angular-ui-kit/assets/scss/mdb.scss",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/chart.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -121,5 +123,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

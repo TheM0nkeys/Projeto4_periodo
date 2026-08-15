@@ -1,17 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-// Imports do MDB para o Form Input
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
-
-// Seu modelo de Carro
 import { Carro } from '../../../../models/carro';
 
 @Component({
   selector: 'app-carroslist',
   standalone: true,
-  imports: [CommonModule, FormsModule, MdbFormsModule],
+  imports: [CommonModule, FormsModule, MdbFormsModule, RouterLink],
   templateUrl: './carroslist.component.html',
   styleUrls: ['./carroslist.component.scss']
 })
@@ -23,17 +20,14 @@ export class CarroslistComponent {
     { id: 4, marca: 'Fiat', modelo: 'Argo', ano: 2020, placa: 'JKL-3456', selecionado: false },
     { id: 5, marca: 'Chevrolet', modelo: 'Onix', ano: 2023, placa: 'MNO-7890', selecionado: false },
   ];
-
-  // Coluna atualmente selecionada para busca (padrão: 'modelo')
+  private router = inject(Router);
   colunaSelecionada: keyof Carro = 'modelo';
-
-  // Texto da pesquisa
   busca: string = '';
-
   qtdPagina = 5;
   paginaAtual = 1;
 
-  // 1. Filtra a lista inteira baseando-se SOMENTE na coluna selecionada
+  elementoSelecionado: Carro | null = null;
+
   get filteredElements(): Carro[] {
     if (!this.busca.trim()) {
       return this.elements;
@@ -64,13 +58,17 @@ export class CarroslistComponent {
     this.paginaAtual = 1;
   }
 
-  toggleTudo(event: Event): void {
-    const isChecked = (event.target as HTMLInputElement).checked;
-    this.elementosPagina.forEach(el => el.selecionado = isChecked);
-  }
+  selecionarElemento(elemento: Carro): void {
+    const jaSelecionado = elemento.selecionado;
 
-  selecionaTudo(): boolean {
-    return this.elementosPagina.length > 0 && this.elementosPagina.every(elemento => elemento.selecionado);
+    this.elements.forEach(item => item.selecionado = false);
+
+    if (!jaSelecionado) {
+      elemento.selecionado = true;
+      this.elementoSelecionado = elemento;
+    } else {
+      this.elementoSelecionado = null;
+    }
   }
 
   proximaPag(): void {
@@ -79,5 +77,14 @@ export class CarroslistComponent {
 
   anteriorPag(): void {
     if (this.paginaAtual > 1) this.paginaAtual--;
+  }
+
+  criarBttn(): void
+  {
+    this.router.navigate(['/carros/new']);
+  }
+  editarBttn(carro:Carro):void
+  {
+    this.router.navigate(['/carros/edit', carro.id]);
   }
 }

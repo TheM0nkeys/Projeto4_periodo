@@ -19,9 +19,10 @@
     </div>
 
     <div class="col-md-6 text-end">
-      <small class="text-muted">
-        Clique no título de qualquer coluna para mudar o foco da busca.
-      </small>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-success" mdbRipple (click)="criarBttn()">Criar</button>
+        <button type="button" class="btn btn-warning" mdbRipple [disabled]="!elementoSelecionado" (click)="editarBttn(elementoSelecionado)">Editar</button>
+      </div>
     </div>
   </div>
 
@@ -30,20 +31,8 @@
     <table class="table align-middle mb-0 bg-white table-hover">
       <thead class="bg-light sticky-top">
         <tr>
-          <!-- Checkbox Geral -->
-          <th style="width: 40px;">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [checked]="selecionaTudo()"
-              (change)="toggleTudo($event)"
-            />
-          </th>
-
-          <!-- Colunas com Seleção/Foco ao Clicar -->
           <th
             class="fw-bold cursor-pointer"
-            [class.table-primary]="colunaSelecionada === 'marca'"
             (click)="selecionarColuna('marca')"
             style="cursor: pointer;"
           >
@@ -53,7 +42,6 @@
 
           <th
             class="fw-bold cursor-pointer"
-            [class.table-primary]="colunaSelecionada === 'modelo'"
             (click)="selecionarColuna('modelo')"
             style="cursor: pointer;"
           >
@@ -63,7 +51,6 @@
 
           <th
             class="fw-bold cursor-pointer"
-            [class.table-primary]="colunaSelecionada === 'ano'"
             (click)="selecionarColuna('ano')"
             style="cursor: pointer;"
           >
@@ -73,37 +60,34 @@
 
           <th
             class="fw-bold cursor-pointer"
-            [class.table-primary]="colunaSelecionada === 'placa'"
             (click)="selecionarColuna('placa')"
             style="cursor: pointer;"
           >
             Placa
             <i *ngIf="colunaSelecionada === 'placa'" class="fas fa-search-location ms-1 text-primary"></i>
           </th>
+          
         </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let elemento of elementosPagina" [class.table-active]="elemento.selecionado">
-          <td>
-            <input
-              class="form-check-input"
-              type="checkbox"
-              [(ngModel)]="elemento.selecionado"
-            />
-          </td>
-
-          <!-- Células destacadas visualmente se a coluna for a selecionada -->
-          <td [class.table-primary]="colunaSelecionada === 'marca'">{{ elemento.marca }}</td>
-          <td [class.table-primary]="colunaSelecionada === 'modelo'">{{ elemento.modelo }}</td>
-          <td [class.table-primary]="colunaSelecionada === 'ano'">{{ elemento.ano }}</td>
-          <td [class.table-primary]="colunaSelecionada === 'placa'">{{ elemento.placa }}</td>
+        <!-- Clique na linha alterna a seleção e aplica a classe 'table-primary' para deixá-la azulada -->
+        <tr 
+          *ngFor="let elemento of elementosPagina" 
+          [class.table-primary]="elemento.selecionado"
+          (click)="selecionarElemento(elemento)"
+          style="cursor: pointer;"
+        >
+          <td>{{ elemento.marca }}</td>
+          <td>{{ elemento.modelo }}</td>
+          <td>{{ elemento.ano }}</td>
+          <td>{{ elemento.placa }}</td>
         </tr>
 
         <!-- Mensagem caso nada seja encontrado -->
         <tr *ngIf="filteredElements.length === 0">
-          <td colspan="5" class="text-center py-3 text-muted">
-            Nenhum carro encontrado na coluna <strong>{{ colunaSelecionada }}</strong> para "{{ busca }}".
+          <td colspan="4" class="text-center py-3 text-muted">
+            Nenhum resultado encontrado na coluna <strong>{{ colunaSelecionada }}</strong> para "{{ busca }}".
           </td>
         </tr>
       </tbody>
@@ -112,7 +96,7 @@
 
   <!-- Paginação -->
   <div class="d-flex justify-content-end align-items-center pt-3 border-top mt-2 pe-2 text-muted">
-    <span class="me-3 fs-7">colunas por pagina:</span>
+    <span class="me-3 fs-7">Itens por página:</span>
 
     <select class="form-select form-select-sm w-auto me-4" [(ngModel)]="qtdPagina" (change)="paginaAtual = 1">
       <option [ngValue]="5">5</option>
@@ -123,7 +107,7 @@
     <span class="me-4 fs-7">
       {{ (paginaAtual - 1) * qtdPagina + (filteredElements.length > 0 ? 1 : 0) }} -
       {{ paginaAtual * qtdPagina > filteredElements.length ? filteredElements.length : paginaAtual * qtdPagina }}
-      of {{ filteredElements.length }}
+      de {{ filteredElements.length }}
     </span>
 
     <button

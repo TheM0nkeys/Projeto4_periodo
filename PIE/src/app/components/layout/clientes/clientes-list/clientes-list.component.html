@@ -1,227 +1,91 @@
-<div class="clientes-page">
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
 
-  <!-- CABEÇALHO -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 class="mb-1">
+            Clientes
+          </h3>
+          <p class="text-muted mb-0">
+            Gerenciamento de clientes
+          </p>
+        </div>
+        <a routerLink="/dashboard/clientes/new" class="btn btn-primary" mdbRipple>
+          + Novo cliente
+        </a>
+      </div>
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body p-0">
 
-    <div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="bg-light">
+                <tr>
+                  <th class="py-3 px-4">ID</th>
+                  <th class="py-3 px-4">Nome</th>
+                  <th class="py-3 px-4">E-mail</th>
+                  <th class="py-3 px-4">Telefone</th>
+                  <th class="py-3 px-4 text-center">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (cliente of clientesPagina; track cliente.id) {
+                  <tr>
+                    <td class="py-3 px-4">{{ cliente.id }}</td>
+                    <td class="py-3 px-4">{{ cliente.nome }}</td>
+                    <td class="py-3 px-4">{{ cliente.email }}</td>
+                    <td class="py-3 px-4">{{ cliente.telefone }}</td>
+                    <td class="py-3 px-4 text-center">
+                      <a [routerLink]="['/dashboard/clientes/edit', cliente.id]" class="btn btn-link btn-sm px-2 text-warning" mdbRipple>
+                        Editar
+                      </a>
+                      <button type="button" class="btn btn-link btn-sm px-2 text-danger" (click)="excluir(cliente.id)" mdbRipple>
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                }
 
-      <h2 class="mb-1">
-        Clientes
-      </h2>
+                @if (clientes.length === 0) {
+                  <tr>
+                    <td colspan="5" class="text-center py-5">
+                      <span class="text-muted">
+                        Nenhum cliente cadastrado.
+                      </span>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
 
-      <p class="text-muted mb-0">
-        Gerenciamento de clientes
-      </p>
+        </div>
 
-    </div>
-
-
-    <!-- NOVO CLIENTE -->
-
-    <a
-      routerLink="/dashboard/clientes/novo"
-      class="btn btn-primary">
-
-      + Novo cliente
-
-    </a>
-
-  </div>
-
-
-  <!-- CARD -->
-
-  <div class="card shadow-2-strong">
-
-    <div class="card-body">
-
-      <!-- TABELA -->
-
-      <div class="table-responsive">
-
-        <table class="table table-hover align-middle">
-
-          <!-- CABEÇALHO DA TABELA -->
-
-          <thead>
-
-            <tr>
-
-              <th>
-                ID
-              </th>
-
-              <th>
-                Nome
-              </th>
-
-              <th>
-                E-mail
-              </th>
-
-              <th>
-                Telefone
-              </th>
-
-              <th class="text-center">
-                Ações
-              </th>
-
-            </tr>
-
-          </thead>
-
-
-          <!-- CORPO DA TABELA -->
-
-          <tbody>
-
-            @for (
-              cliente of clientesPagina;
-              track cliente.id
-            ) {
-
-              <tr>
-
-                <!-- ID -->
-
-                <td>
-                  {{ cliente.id }}
-                </td>
-
-
-                <!-- NOME -->
-
-                <td>
-                  {{ cliente.nome }}
-                </td>
-
-
-                <!-- EMAIL -->
-
-                <td>
-                  {{ cliente.email }}
-                </td>
-
-
-                <!-- TELEFONE -->
-
-                <td>
-                  {{ cliente.telefone }}
-                </td>
-
-
-                <!-- AÇÕES -->
-
-                <td class="text-center">
-
-                  <!-- EDITAR -->
-
-                  <a
-                    [routerLink]="[
-                      '/dashboard/clientes',
-                      cliente.id
-                    ]"
-                    class="btn btn-warning btn-sm me-2">
-
-                    Editar
-
-                  </a>
-
-
-                  <!-- EXCLUIR -->
-
-                  <button
-                    type="button"
-                    class="btn btn-danger btn-sm"
-                    (click)="excluir(cliente.id)">
-
-                    Excluir
-
+        @if (clientes.length > 0) {
+          <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3">
+            <span class="text-muted small">
+              Página {{ paginaAtual }} de {{ totalPaginas }}
+            </span>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item" [class.disabled]="paginaAtual === 1">
+                  <button class="page-link" (click)="paginaAnterior()">
+                    Anterior
                   </button>
-
-                </td>
-
-              </tr>
-
-            }
-
-
-            <!-- NENHUM CLIENTE -->
-
-            @if (clientesPagina.length === 0) {
-
-              <tr>
-
-                <td
-                  colspan="5"
-                  class="text-center py-5">
-
-                  <p class="text-muted mb-0">
-
-                    Nenhum cliente cadastrado.
-
-                  </p>
-
-                </td>
-
-              </tr>
-
-            }
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-
-      <!-- PAGINAÇÃO -->
-
-      <div
-        class="d-flex justify-content-center align-items-center gap-3 mt-4">
-
-
-        <!-- ANTERIOR -->
-
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          (click)="paginaAnterior()"
-          [disabled]="paginaAtual === 1">
-
-          ← Anterior
-
-        </button>
-
-
-        <!-- PÁGINA ATUAL -->
-
-        <span class="fw-semibold">
-
-          Página {{ paginaAtual }}
-          de {{ totalPaginas }}
-
-        </span>
-
-
-        <!-- PRÓXIMA -->
-
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          (click)="proximaPagina()"
-          [disabled]="paginaAtual === totalPaginas">
-
-          Próxima →
-
-        </button>
-
+                </li>
+                <li class="page-item" [class.disabled]="paginaAtual === totalPaginas">
+                  <button class="page-link" (click)="proximaPagina()">
+                    Próxima
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        }
       </div>
 
     </div>
-
   </div>
-
 </div>

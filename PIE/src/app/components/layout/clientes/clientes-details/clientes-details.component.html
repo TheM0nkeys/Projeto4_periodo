@@ -1,207 +1,82 @@
-<div class="clientes-page">
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
 
-  <div class="form-card">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
 
-    <div class="header">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h3 class="mb-1">
+                {{ modoEdicao ? 'Editar cliente' : 'Novo cliente' }}
+              </h3>
+              <p class="text-muted mb-0">
+                Preencha os dados do cliente.
+              </p>
+            </div>
+            <a routerLink="/dashboard/clientes" class="btn btn-outline-secondary btn-sm" mdbRipple>
+              &larr; Voltar
+            </a>
+          </div>
 
-      <div>
+          <form [formGroup]="clienteForm" (ngSubmit)="salvar()">
 
-        <h2>
-          {{ modoEdicao ? 'Editar cliente' : 'Novo cliente' }}
-        </h2>
+            <mdb-form-control class="mb-4">
+              <input mdbValidate mdbInput id="nome" type="text" class="form-control" formControlName="nome" />
+              <label mdbLabel class="form-label" for="nome">Nome</label>
 
-        <p class="text-muted">
-          Preencha os dados do cliente.
-        </p>
+              <mdb-error *ngIf="nomeInvalido">
+                @if (clienteForm.controls.nome.hasError('required')) {
+                  O nome é obrigatório.
+                }
+                @if (clienteForm.controls.nome.hasError('minlength')) {
+                  O nome deve ter pelo menos 3 caracteres.
+                }
+              </mdb-error>
+            </mdb-form-control>
 
+            <mdb-form-control class="mb-4">
+              <input mdbValidate mdbInput id="email" type="email" class="form-control" formControlName="email" />
+              <label mdbLabel class="form-label" for="email">E-mail</label>
+
+              <mdb-error *ngIf="emailInvalido">
+                @if (clienteForm.controls.email.hasError('required')) {
+                  O e-mail é obrigatório.
+                }
+                @if (clienteForm.controls.email.hasError('email')) {
+                  Digite um e-mail válido.
+                }
+              </mdb-error>
+            </mdb-form-control>
+
+            <mdb-form-control class="mb-4">
+              <input mdbValidate mdbInput id="telefone" type="tel" class="form-control" formControlName="telefone" />
+              <label mdbLabel class="form-label" for="telefone">Telefone</label>
+
+              <mdb-error *ngIf="telefoneInvalido">
+                @if (clienteForm.controls.telefone.hasError('required')) {
+                  O telefone é obrigatório.
+                }
+                @if (clienteForm.controls.telefone.hasError('minlength')) {
+                  Digite um telefone válido.
+                }
+              </mdb-error>
+            </mdb-form-control>
+
+            <div class="d-flex justify-content-end gap-2 mt-4">
+              <a routerLink="/dashboard/clientes" class="btn btn-light" mdbRipple>
+                Cancelar
+              </a>
+              <button type="submit" class="btn btn-primary" mdbRipple>
+                {{ modoEdicao ? 'Atualizar' : 'Cadastrar' }}
+              </button>
+            </div>
+
+          </form>
+
+        </div>
       </div>
-
-      <a
-        routerLink="/dashboard/clientes"
-        class="btn btn-outline-secondary">
-
-        ← Voltar
-
-      </a>
 
     </div>
-
-    <form
-      [formGroup]="clienteForm"
-      (ngSubmit)="salvar()">
-
-      <div class="campo">
-
-        <mdb-form-control>
-
-          <input
-            mdbInput
-            type="text"
-            id="nome"
-            class="form-control"
-            formControlName="nome"
-            placeholder="Digite o nome"
-          />
-
-          <label
-            mdbLabel
-            class="form-label"
-            for="nome">
-
-            Nome
-
-          </label>
-
-        </mdb-form-control>
-
-        @if (nomeInvalido) {
-
-          <div class="erro">
-
-            @if (
-              clienteForm.controls.nome.hasError('required')
-            ) {
-
-              O nome é obrigatório.
-
-            }
-
-            @if (
-              clienteForm.controls.nome.hasError('minlength')
-            ) {
-
-              O nome deve ter pelo menos 3 caracteres.
-
-            }
-
-          </div>
-
-        }
-
-      </div>
-
-      <div class="campo">
-
-        <mdb-form-control>
-
-          <input
-            mdbInput
-            type="email"
-            id="email"
-            class="form-control"
-            formControlName="email"
-            placeholder="cliente@email.com"
-          />
-
-          <label
-            mdbLabel
-            class="form-label"
-            for="email">
-
-            E-mail
-
-          </label>
-
-        </mdb-form-control>
-
-        @if (emailInvalido) {
-
-          <div class="erro">
-
-            @if (
-              clienteForm.controls.email.hasError('required')
-            ) {
-
-              O e-mail é obrigatório.
-
-            }
-
-            @if (
-              clienteForm.controls.email.hasError('email')
-            ) {
-
-              Digite um e-mail válido.
-
-            }
-
-          </div>
-
-        }
-
-      </div>
-
-      <div class="campo">
-
-        <mdb-form-control>
-
-          <input
-            mdbInput
-            type="tel"
-            id="telefone"
-            class="form-control"
-            formControlName="telefone"
-            placeholder="(45) 99999-9999"
-          />
-
-          <label
-            mdbLabel
-            class="form-label"
-            for="telefone">
-
-            Telefone
-
-          </label>
-
-        </mdb-form-control>
-
-        @if (telefoneInvalido) {
-
-          <div class="erro">
-
-            @if (
-              clienteForm.controls.telefone.hasError('required')
-            ) {
-
-              O telefone é obrigatório.
-
-            }
-
-            @if (
-              clienteForm.controls.telefone.hasError('minlength')
-            ) {
-
-              Digite um telefone válido.
-
-            }
-
-          </div>
-
-        }
-
-      </div>
-
-      <div class="botoes">
-
-        <a
-          routerLink="/dashboard/clientes"
-          class="btn btn-outline-secondary">
-
-          Cancelar
-
-        </a>
-
-        <button
-          type="submit"
-          class="btn btn-primary">
-
-          {{ modoEdicao ? 'Atualizar' : 'Cadastrar' }}
-
-        </button>
-
-      </div>
-
-    </form>
-
   </div>
-
 </div>

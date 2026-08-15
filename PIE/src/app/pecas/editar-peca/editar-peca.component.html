@@ -1,0 +1,196 @@
+<div class="modal-header">
+
+  <h5 class="modal-title">
+    Editar peça
+  </h5>
+
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Fechar"
+    (click)="cancelar()"
+  ></button>
+
+</div>
+
+
+<form (ngSubmit)="atualizar()">
+
+  <div class="modal-body">
+
+    <mdb-form-control class="mb-4">
+
+      <input
+        mdbInput
+        type="text"
+        id="editarNome"
+        name="nome"
+        class="form-control"
+        [(ngModel)]="peca.nome"
+        required
+      >
+
+      <label
+        mdbLabel
+        class="form-label"
+        for="editarNome"
+      >
+        Nome
+      </label>
+
+    </mdb-form-control>
+
+
+    <mdb-form-control class="mb-4">
+
+      <input
+        mdbInput
+        type="text"
+        id="editarCodigo"
+        name="codigo"
+        class="form-control"
+        [(ngModel)]="peca.codigo"
+        required
+      >
+
+      <label
+        mdbLabel
+        class="form-label"
+        for="editarCodigo"
+      >
+        Código
+      </label>
+
+    </mdb-form-control>
+
+
+    <div class="mb-4">
+
+      <label
+        class="form-label"
+        for="editarCategoria"
+      >
+        Categoria
+      </label>
+
+      <select
+        id="editarCategoria"
+        name="categoria"
+        class="form-select"
+        [(ngModel)]="peca.categoria"
+        required
+      >
+
+        <option value="Motor">
+          Motor
+        </option>
+
+        <option value="Freios">
+          Freios
+        </option>
+
+        <option value="Suspensão">
+          Suspensão
+        </option>
+
+        <option value="Elétrica">
+          Elétrica
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <mdb-form-control class="mb-4">
+
+      <input
+        mdbInput
+        type="text"
+        id="editarFabricante"
+        name="fabricante"
+        class="form-control"
+        [(ngModel)]="peca.fabricante"
+      >
+
+      <label
+        mdbLabel
+        class="form-label"
+        for="editarFabricante"
+      >
+        Fabricante
+      </label>
+
+    </mdb-form-control>
+
+
+    <mdb-form-control class="mb-4">
+
+      <input
+        mdbInput
+        type="number"
+        id="editarPreco"
+        name="preco"
+        class="form-control"
+        min="0"
+        step="0.01"
+        [(ngModel)]="peca.preco"
+      >
+
+      <label
+        mdbLabel
+        class="form-label"
+        for="editarPreco"
+      >
+        Preço
+      </label>
+
+    </mdb-form-control>
+
+
+    <mdb-form-control class="mb-4">
+
+      <input
+        mdbInput
+        type="number"
+        id="editarQuantidade"
+        name="quantidade"
+        class="form-control"
+        min="0"
+        [(ngModel)]="peca.quantidade"
+      >
+
+      <label
+        mdbLabel
+        class="form-label"
+        for="editarQuantidade"
+      >
+        Quantidade
+      </label>
+
+    </mdb-form-control>
+
+  </div>
+
+
+  <div class="modal-footer">
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="cancelar()"
+    >
+      Cancelar
+    </button>
+
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+    >
+      Atualizar
+    </button>
+
+  </div>
+
+</form>

@@ -2,8 +2,7 @@ import { Routes } from '@angular/router';
 import { PrincipalComponent } from './components/layout/principal/principal.component';
 import { LoginComponent } from './components/layout/login/login.component';
 import { CarrosDetailsComponent } from './components/layout/carros/carros-details/carros-details.component';
-import { PecasListComponent } from './components/layout/pecas/pecas-list/pecas-list.component';
-import { PecasDetailsComponent } from './components/layout/pecas/pecas-details/pecas-details.component';
+import { PecasComponent } from './pecas/pecas.component';
 import { ClientesListComponent } from './components/layout/clientes/clientes-list/clientes-list.component';
 import { ClientesDetailsComponent } from './components/layout/clientes/clientes-details/clientes-details.component';
 import { VendasDetailsComponent } from './components/layout/vendas/vendas-details/vendas-details.component';
@@ -19,9 +18,7 @@ export const routes: Routes = [
       {path: 'carros', component: CarroslistComponent},
       {path: 'carros/new', component: CarrosDetailsComponent},
       {path: 'carros/edit/:id', component: CarrosDetailsComponent},
-      {path: 'pecas', component: PecasListComponent},
-      {path: 'pecas/new', component: PecasDetailsComponent},
-      {path: 'pecas/edit/:id', component: PecasDetailsComponent},
+      { path: 'pecas', component: PecasComponent },
       {path: 'clientes', component: ClientesListComponent},
       {path: 'clientes/new', component: ClientesDetailsComponent},
       {path: 'clientes/edit/:id', component: ClientesDetailsComponent},

@@ -1,1 +1,91 @@
-<p>clientes-list works!</p>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12">
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h3 class="mb-1">
+            Clientes
+          </h3>
+          <p class="text-muted mb-0">
+            Gerenciamento de clientes
+          </p>
+        </div>
+        <a routerLink="/dashboard/clientes/new" class="btn btn-primary" mdbRipple>
+          + Novo cliente
+        </a>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body p-0">
+
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="bg-light">
+                <tr>
+                  <th class="py-3 px-4">ID</th>
+                  <th class="py-3 px-4">Nome</th>
+                  <th class="py-3 px-4">E-mail</th>
+                  <th class="py-3 px-4">Telefone</th>
+                  <th class="py-3 px-4 text-center">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (cliente of clientesPagina; track cliente.id) {
+                  <tr>
+                    <td class="py-3 px-4">{{ cliente.id }}</td>
+                    <td class="py-3 px-4">{{ cliente.nome }}</td>
+                    <td class="py-3 px-4">{{ cliente.email }}</td>
+                    <td class="py-3 px-4">{{ cliente.telefone }}</td>
+                    <td class="py-3 px-4 text-center">
+                      <a [routerLink]="['/dashboard/clientes/edit', cliente.id]" class="btn btn-link btn-sm px-2 text-warning" mdbRipple>
+                        Editar
+                      </a>
+                      <button type="button" class="btn btn-link btn-sm px-2 text-danger" (click)="excluir(cliente.id)" mdbRipple>
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                }
+
+                @if (clientes.length === 0) {
+                  <tr>
+                    <td colspan="5" class="text-center py-5">
+                      <span class="text-muted">
+                        Nenhum cliente cadastrado.
+                      </span>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        @if (clientes.length > 0) {
+          <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3">
+            <span class="text-muted small">
+              Página {{ paginaAtual }} de {{ totalPaginas }}
+            </span>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item" [class.disabled]="paginaAtual === 1">
+                  <button class="page-link" (click)="paginaAnterior()">
+                    Anterior
+                  </button>
+                </li>
+                <li class="page-item" [class.disabled]="paginaAtual === totalPaginas">
+                  <button class="page-link" (click)="proximaPagina()">
+                    Próxima
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+</div>

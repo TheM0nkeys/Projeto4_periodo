@@ -10,7 +10,6 @@ import { VendasCarrosListComponent } from './components/layout/vendas/vendasCarr
 import { VendasPecasDetailsComponent } from './components/layout/vendas/vendasPecas/vendas-pecas-details/vendas-pecas-details.component';
 import { VendasPecasListComponent } from './components/layout/vendas/vendasPecas/vendas-pecas-list/vendas-pecas-list.component';
 import { CarroslistComponent } from './components/layout/carros/carroslist/carroslist.component';
-import { Component } from '@angular/core';
 
 
 export const routes : Routes = [

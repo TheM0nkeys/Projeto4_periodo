@@ -59,6 +59,7 @@
             ],
             "scripts": [
               "node_modules/chart.js/dist/chart.js"
+
             ]
           },
           "configurations": {
@@ -115,9 +116,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+
             "scripts": []
           }
         }

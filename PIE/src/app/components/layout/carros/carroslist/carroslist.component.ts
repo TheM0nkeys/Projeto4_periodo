@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
@@ -20,7 +20,10 @@ export class CarroslistComponent {
     { id: 4, marca: 'Fiat', modelo: 'Argo', ano: 2020, placa: 'JKL-3456', selecionado: false },
     { id: 5, marca: 'Chevrolet', modelo: 'Onix', ano: 2023, placa: 'MNO-7890', selecionado: false },
   ];
+
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   colunaSelecionada: keyof Carro = 'modelo';
   busca: string = '';
   qtdPagina = 5;
@@ -79,12 +82,15 @@ export class CarroslistComponent {
     if (this.paginaAtual > 1) this.paginaAtual--;
   }
 
-  criarBttn(): void
-  {
-    this.router.navigate(['/carros/new']);
+  criarBttn(): void {
+    // Navega para 'dashboard/carros/new'
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
-  editarBttn(carro:Carro):void
-  {
-    this.router.navigate(['/carros/edit', carro.id]);
+
+  editarBttn(carro: Carro | null): void {
+    if (carro && carro.id) {
+      // Navega para 'dashboard/carros/edit/:id'
+      this.router.navigate(['edit', carro.id], { relativeTo: this.route });
+    }
   }
 }

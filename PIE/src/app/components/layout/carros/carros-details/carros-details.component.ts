@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { MdbFormControlComponent } from 'mdb-angular-ui-kit/forms';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 @Component({
   selector: 'app-carros-details',
-  imports: [MdbFormControlComponent],
+  imports: [MdbFormsModule],
   templateUrl: './carros-details.component.html',
   styleUrl: './carros-details.component.scss'
 })
